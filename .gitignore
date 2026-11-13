@@ -8,6 +8,7 @@ __pycache__/
 node_modules/
 dist/
 *.local
+.claude/
 
 # Model assets are downloaded, not committed (see scripts/download_model.py)
 models/*.task
@@ -20,7 +21,6 @@ models/*.part
 *.db
 *.sqlite3
 .env
-*.claude
 
 .DS_Store
 
