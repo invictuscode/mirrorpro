@@ -1,0 +1,94 @@
+{
+  "id": "shoulder_flexion",
+  "version": 3,
+  "name": "Shoulder flexion (forward raise)",
+  "description": "One arm is raised forward and up with the elbow straight, then lowered. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand side-on to the screen with the working arm nearest the camera.",
+    "Keeping your elbow straight, raise your arm forward and up.",
+    "Lower it back to your side in a controlled way."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Turn so the working arm faces the camera; the forward raise must happen side-on to be measured."
+  },
+  "relevant_landmarks": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip"
+  ],
+  "display_angles": [
+    "shoulder_elevation",
+    "elbow_flexion"
+  ],
+  "signal": {
+    "joint": "shoulder_elevation",
+    "side_mode": "single",
+    "default_side": "right"
+  },
+  "rep_counting": {
+    "hysteresis_deg": 6,
+    "confirm_ms": 120,
+    "min_hold_ms": 0,
+    "max_rep_ms": 15000,
+    "max_signal_gap_ms": 900,
+    "start_deg": 30,
+    "target_deg": 120,
+    "min_rep_ms": 1000
+  },
+  "dosage": {
+    "reps_per_set": 10,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Raise your arm a little higher."
+    },
+    "form_rules": [
+      {
+        "id": "elbow_straight",
+        "joint": "elbow_flexion",
+        "side": "signal",
+        "phases": [
+          "moving",
+          "at_target",
+          "returning"
+        ],
+        "max_deg": 45,
+        "sustain_ms": 500,
+        "message": "Keep your elbow fairly straight as you raise your arm.",
+        "blocks_rep": true
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Stand side-on to the screen with the working arm nearest the camera.",
+      "Stand tall with your arm relaxed by your side, thumb pointing forward."
+    ],
+    "cues": {
+      "start": "Arm relaxed by your side.",
+      "move": "Raise your straight arm forward and up toward the green line.",
+      "hold": "Pause at the top.",
+      "back": "Lower your arm slowly back to your side."
+    },
+    "key_points": [
+      "Raise the arm in front of you, not out to the side.",
+      "Keep your body still; avoid leaning back to lift higher."
+    ],
+    "tempo": "About 2 seconds up and 2 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

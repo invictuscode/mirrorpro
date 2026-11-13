@@ -1,0 +1,785 @@
+/*
+ * Smart-mirror layout. Pure black background: behind a two-way mirror, black
+ * pixels read as the mirror surface and only bright content shows through.
+ * Sizes use vmin so text scales with the display and stays readable from a
+ * few feet away; the layout stacks in portrait (typical mirror orientation).
+ */
+
+.mirror {
+  --m-bg: #000;
+  --m-panel: #0d1013;
+  --m-line: #20262d;
+  --m-text: #f4f7fa;
+  --m-muted: #9aa6b2;
+  /* Fixed to the viewport so the camera view can fill the remaining space;
+     home and summary scroll inside .m-content if needed. */
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--m-bg);
+  color: var(--m-text);
+  font-size: clamp(15px, 1.9vmin, 22px);
+}
+
+.mirror:fullscreen {
+  background: var(--m-bg);
+}
+
+.m-util {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 0;
+  font-size: 13px;
+}
+.m-util button,
+.m-util a {
+  background: none;
+  border: 1px solid var(--m-line);
+  color: var(--m-muted);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+.m-util button:focus-visible,
+.m-util a:focus-visible,
+.m-btn:focus-visible,
+.m-segmented button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.m-alert {
+  margin: 10px 16px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(242, 100, 90, 0.5);
+  color: var(--err);
+}
+
+.m-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 1.5vmin 2.5vmin;
+  display: flex;
+  flex-direction: column;
+}
+
+.m-disclaimer {
+  padding: 8px 16px 12px;
+  font-size: 12px;
+  color: #6b7480;
+  text-align: center;
+}
+
+.m-title {
+  margin: 0 0 1.5vmin;
+  font-size: clamp(28px, 5vmin, 60px);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.m-muted {
+  color: var(--m-muted);
+}
+.m-fine {
+  color: var(--m-muted);
+  font-size: 0.8em;
+}
+.m-center {
+  margin: auto;
+  text-align: center;
+}
+.m-error {
+  color: var(--err);
+}
+
+/* Buttons --------------------------------------------------------------- */
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1.4vmin 3vmin;
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--m-line);
+  background: var(--m-panel);
+  color: var(--m-text);
+  font: inherit;
+  font-size: clamp(16px, 2.2vmin, 26px);
+  font-weight: 600;
+  cursor: pointer;
+}
+.m-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.m-btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.m-btn-danger {
+  background: var(--err);
+  border-color: var(--err);
+  color: #1d0605;
+}
+.m-btn kbd {
+  font: inherit;
+  font-size: 0.6em;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  opacity: 0.6;
+}
+
+/* Home ------------------------------------------------------------------ */
+.m-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2vmin;
+}
+.m-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vmin;
+  padding: 2.5vmin;
+  border: 1px solid var(--m-line);
+  border-radius: 16px;
+  background: var(--m-panel);
+}
+.m-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.m-card h2 {
+  margin: 0;
+  font-size: clamp(22px, 3.2vmin, 36px);
+}
+.m-card p {
+  margin: 0;
+  line-height: 1.4;
+}
+.m-card-meta {
+  font-size: 0.9em;
+}
+.m-card .m-btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.m-badge {
+  flex: none;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--warn);
+  border: 1px solid rgba(245, 181, 68, 0.5);
+}
+.m-segmented {
+  display: inline-flex;
+  border: 1px solid var(--m-line);
+  border-radius: 10px;
+  overflow: hidden;
+  align-self: flex-start;
+}
+.m-segmented button {
+  background: none;
+  border: none;
+  color: var(--m-muted);
+  padding: 10px 18px;
+  font: inherit;
+  cursor: pointer;
+  min-height: 44px;
+}
+.m-segmented button.on {
+  background: var(--m-line);
+  color: var(--m-text);
+}
+
+/* Session --------------------------------------------------------------- */
+.m-session {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5vmin;
+}
+.m-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2vmin;
+  flex-wrap: wrap;
+}
+.m-exercise {
+  font-size: clamp(24px, 4vmin, 48px);
+  font-weight: 650;
+}
+.m-topbar-stats {
+  display: flex;
+  gap: 4vmin;
+}
+.m-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.m-stat-label {
+  color: var(--m-muted);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.m-stat-value {
+  font-size: clamp(22px, 3.6vmin, 44px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.m-main {
+  min-height: 0;
+  display: grid;
+  gap: 2.5vmin;
+}
+/* Camera on: an even split between the camera (all body points) and the counter. */
+.m-session.with-camera .m-main {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+/* Camera off: the counter takes the whole screen. */
+.m-session.counter-only .m-main {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.m-session.counter-only .m-side {
+  width: min(100%, 1000px);
+  align-items: center;
+  text-align: center;
+}
+.m-session.counter-only .m-reps-n {
+  font-size: clamp(110px, 26vmin, 340px);
+}
+.m-session.counter-only .m-feedback-slot {
+  justify-content: center;
+}
+.m-target-line {
+  font-size: 1.05em;
+}
+.m-btn[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.m-btn-quiet {
+  background: none;
+  border-color: transparent;
+  color: var(--m-muted);
+}
+
+.m-stage {
+  position: relative;
+  min-height: 0;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.m-stage .pose-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.m-side {
+  min-width: 0;
+  min-height: 0;
+  /* Scroll inside the column rather than running under the controls. */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vmin;
+}
+.m-reps {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5vmin;
+  line-height: 0.9;
+}
+.m-reps-n {
+  font-size: clamp(80px, 17vmin, 220px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.m-reps-of {
+  font-size: clamp(28px, 5vmin, 64px);
+  color: var(--m-muted);
+  font-weight: 500;
+}
+.m-phase {
+  font-size: clamp(20px, 3.2vmin, 40px);
+  font-weight: 500;
+}
+.m-progress {
+  height: 1.4vmin;
+  min-height: 10px;
+  border-radius: 999px;
+  background: var(--m-line);
+  overflow: hidden;
+  width: 100%;
+}
+.m-progress span {
+  display: block;
+  height: 100%;
+  background: var(--info);
+  transition: width 0.15s linear;
+}
+.m-progress span.at-target {
+  background: var(--accent);
+}
+
+.m-angles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vmin 4vmin;
+  align-items: baseline;
+}
+.m-angle {
+  display: flex;
+  flex-direction: column;
+}
+.m-angle-label {
+  color: var(--m-muted);
+  text-transform: capitalize;
+}
+.m-angle-value {
+  font-size: clamp(28px, 5vmin, 60px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.m-angle-value.invalid {
+  font-size: clamp(16px, 2.4vmin, 26px);
+  font-weight: 400;
+  color: var(--m-muted);
+}
+.m-angles .m-fine {
+  flex-basis: 100%;
+}
+
+.m-feedback-slot {
+  min-height: 10vmin;
+  display: flex;
+  align-items: center;
+}
+.m-feedback {
+  padding: 1.6vmin 2.4vmin;
+  border-radius: 14px;
+  border: 3px solid var(--m-line);
+  font-size: clamp(22px, 4.2vmin, 52px);
+  font-weight: 600;
+  line-height: 1.2;
+  animation: fb-in 180ms ease-out;
+}
+.m-feedback.fb-correction {
+  border-color: var(--warn);
+}
+.m-feedback.fb-positive {
+  border-color: var(--accent);
+}
+.m-feedback.fb-cue {
+  border-color: var(--info);
+}
+.m-feedback.fb-tracking {
+  border-color: var(--m-muted);
+  color: #cfd6de;
+}
+@media (prefers-reduced-motion: reduce) {
+  .m-feedback {
+    animation: none;
+  }
+}
+
+.m-instructions summary {
+  cursor: pointer;
+  color: var(--m-muted);
+}
+.m-instructions ol {
+  margin: 8px 0 0;
+  padding-left: 1.4em;
+  line-height: 1.5;
+}
+
+.m-rest {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+}
+.m-rest-label {
+  font-size: clamp(28px, 5vmin, 60px);
+  font-weight: 600;
+  color: var(--info);
+}
+.m-rest-count {
+  font-size: clamp(80px, 18vmin, 230px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.m-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5vmin;
+  align-items: center;
+}
+
+.m-paused {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2vmin;
+  background: rgba(0, 0, 0, 0.88);
+  text-align: center;
+}
+.m-paused-title {
+  font-size: clamp(48px, 10vmin, 130px);
+  font-weight: 700;
+}
+
+/* Summary --------------------------------------------------------------- */
+.m-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2vmin;
+  max-width: 1100px;
+}
+.m-summary-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 3vmin;
+}
+.m-summary-big {
+  font-size: clamp(48px, 10vmin, 120px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.m-sets {
+  border-collapse: collapse;
+  font-size: 1.05em;
+  max-width: 640px;
+}
+.m-sets th,
+.m-sets td {
+  text-align: left;
+  padding: 8px 24px 8px 0;
+  border-bottom: 1px solid var(--m-line);
+  font-variant-numeric: tabular-nums;
+}
+.m-sets th {
+  color: var(--m-muted);
+  font-weight: 500;
+}
+.m-summary-notes {
+  margin: 0;
+  padding-left: 1.2em;
+  line-height: 1.6;
+}
+.m-summary-actions {
+  display: flex;
+  gap: 1.5vmin;
+  flex-wrap: wrap;
+}
+
+/* Portrait (typical mirror mounting) ------------------------------------ */
+@media (orientation: portrait) {
+  .m-session.with-camera .m-main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .m-stage {
+    min-height: 38vh;
+  }
+}
+
+/* Start settings ---------------------------------------------------------- */
+.m-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 2vmin;
+  max-width: 1100px;
+}
+.m-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2.4vmin 3vmin;
+}
+.m-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.m-field-label {
+  font-weight: 600;
+  font-size: 1.05em;
+}
+.m-field-hint {
+  color: var(--m-muted);
+  font-size: 0.85em;
+  line-height: 1.35;
+}
+.m-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.m-stepper button {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 12px;
+  border: 1px solid var(--m-line);
+  background: var(--m-panel);
+  color: var(--m-text);
+  font-size: 28px;
+  cursor: pointer;
+}
+.m-stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.m-stepper button:focus-visible,
+.m-stepper input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.m-stepper input {
+  width: 5.5em;
+  height: 56px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid var(--m-line);
+  background: #000;
+  color: var(--m-text);
+  font: inherit;
+  font-size: clamp(20px, 2.8vmin, 32px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.m-stepper-unit {
+  color: var(--m-muted);
+  font-size: 1.1em;
+}
+.m-demo-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: var(--warn);
+  border: 1px solid rgba(245, 181, 68, 0.4);
+  line-height: 1.45;
+}
+.m-settings-errors {
+  margin: 0;
+  padding-left: 1.2em;
+  line-height: 1.5;
+}
+
+/* Practice repetition, key points, how-to ------------------------------------ */
+.m-practice {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4vmin;
+}
+.m-practice-title {
+  font-size: clamp(26px, 4.4vmin, 54px);
+  font-weight: 700;
+  color: var(--info);
+}
+.m-practice p {
+  margin: 0;
+  line-height: 1.4;
+}
+.m-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vmin;
+}
+.m-steps li {
+  display: flex;
+  gap: 1.6vmin;
+  align-items: baseline;
+  padding: 1vmin 1.4vmin;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: var(--m-muted);
+  font-size: clamp(16px, 2.3vmin, 28px);
+}
+.m-steps li.current {
+  color: var(--m-text);
+  border-color: var(--info);
+  background: rgba(143, 180, 255, 0.08);
+  font-weight: 600;
+}
+.m-step-label {
+  min-width: 4.5em;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.m-keypoints {
+  border-top: 1px solid var(--m-line);
+  padding-top: 1.2vmin;
+}
+.m-keypoints-title {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--m-muted);
+  margin-bottom: 0.6vmin;
+}
+.m-keypoints ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vmin;
+  text-align: left;
+}
+.m-keypoints li {
+  display: flex;
+  gap: 1vmin;
+  align-items: baseline;
+  line-height: 1.35;
+}
+.kp-icon {
+  flex: none;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 700;
+  border: 2px solid var(--m-line);
+  color: var(--m-muted);
+}
+.kp-ok .kp-icon {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.kp-violated .kp-icon {
+  border-color: var(--err);
+  color: #1d0605;
+  background: var(--err);
+}
+.kp-violated {
+  color: var(--m-text);
+  font-weight: 600;
+}
+.kp-uncertain .kp-icon {
+  border-style: dashed;
+}
+.kp-note .kp-icon {
+  border-color: transparent;
+}
+.kp-live {
+  display: block;
+  color: var(--m-muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+}
+.kp-violated .kp-live {
+  color: var(--err);
+}
+.kp-required {
+  color: var(--m-muted);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+.m-howto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2vmin 3vmin;
+  padding: 2vmin;
+  border: 1px solid var(--m-line);
+  border-radius: 14px;
+  background: var(--m-panel);
+}
+.m-howto-title {
+  margin: 0 0 0.8vmin;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--m-muted);
+}
+.m-howto ol,
+.m-howto ul {
+  margin: 0;
+  padding-left: 1.3em;
+  line-height: 1.5;
+}
+.m-howto p {
+  margin: 0.8vmin 0 0;
+}
+.m-check {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 1em;
+}
+.m-check input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+}
+
+/* Form-check allowances on the settings screen ----------------------------------- */
+.m-formchecks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4vmin;
+  padding: 2vmin;
+  border: 1px solid var(--m-line);
+  border-radius: 14px;
+}
+.m-formchecks p {
+  margin: 0;
+  line-height: 1.4;
+}
+.m-formcheck {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+  padding-top: 1.2vmin;
+  border-top: 1px solid var(--m-line);
+}
+.m-formcheck-text {
+  font-weight: 600;
+}
+.m-formcheck-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vmin 4vmin;
+  align-items: flex-end;
+}
+.m-formcheck .m-field-label {
+  text-transform: capitalize;
+}

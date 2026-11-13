@@ -1,0 +1,8 @@
+# Runtime dependencies (pinned; verified together on macOS arm64 / Python 3.13).
+# NOTE: mediapipe depends on opencv-contrib-python. Do NOT also install
+# opencv-python — both provide the `cv2` module and will conflict.
+mediapipe==1.1.1
+opencv-contrib-python==4.14.0.94
+numpy==2.4.6
+fastapi==0.162.0
+uvicorn[standard]==0.54.0

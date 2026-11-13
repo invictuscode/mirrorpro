@@ -1,0 +1,91 @@
+{
+  "id": "standing_arm_raise",
+  "version": 4,
+  "name": "Standing arm raise",
+  "description": "Both arms are raised out to the sides and lowered. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand facing the screen with your arms relaxed at your sides.",
+    "Raise both arms out to the sides as far as your therapist has asked.",
+    "Lower your arms back to your sides in a controlled way."
+  ],
+  "camera": {
+    "view": "front",
+    "angle_space": "image",
+    "guidance": "Face the camera. Stand far enough back that your hips and both hands stay in view with arms raised."
+  },
+  "relevant_landmarks": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_hip",
+    "right_hip"
+  ],
+  "display_angles": [
+    "shoulder_elevation",
+    "elbow_flexion"
+  ],
+  "signal": {
+    "joint": "shoulder_elevation",
+    "side_mode": "mean_of_visible"
+  },
+  "rep_counting": {
+    "start_deg": 30,
+    "target_deg": 120,
+    "hysteresis_deg": 8,
+    "confirm_ms": 120,
+    "min_hold_ms": 0,
+    "min_rep_ms": 800,
+    "max_rep_ms": 20000,
+    "max_signal_gap_ms": 750
+  },
+  "dosage": {
+    "reps_per_set": 10,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Raise your arms a little higher."
+    },
+    "form_rules": [
+      {
+        "id": "elbows_straight",
+        "joint": "elbow_flexion",
+        "side": "both",
+        "phases": [
+          "moving",
+          "at_target",
+          "returning"
+        ],
+        "max_deg": 45,
+        "sustain_ms": 500,
+        "message": "Keep your elbows fairly straight as you raise your arms.",
+        "blocks_rep": true
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Stand facing the screen, far enough back that your hands and feet stay in view with arms overhead.",
+      "Feet hip-width apart, arms relaxed by your sides, palms facing your thighs."
+    ],
+    "cues": {
+      "start": "Arms relaxed by your sides.",
+      "move": "Lift both arms out to the sides toward the green line, elbows straight.",
+      "hold": "Pause at the top.",
+      "back": "Lower both arms slowly back to your sides."
+    },
+    "key_points": [
+      "Lift both arms together, at the same speed.",
+      "Stay upright; avoid leaning to the side to reach higher."
+    ],
+    "tempo": "About 2 seconds up and 2 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

@@ -1,0 +1,80 @@
+{
+  "id": "standing_march",
+  "version": 2,
+  "name": "Standing march",
+  "description": "One knee lifts in front of the body, then the foot returns to the floor. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand side-on to the screen next to a stable support you can hold.",
+    "Lift the knee nearest the camera up in front of you.",
+    "Lower your foot back to the floor."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Stand side-on so the working hip and knee stay in view, with a support within reach."
+  },
+  "relevant_landmarks": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "display_angles": [
+    "hip_flexion",
+    "knee_flexion"
+  ],
+  "signal": {
+    "joint": "hip_flexion",
+    "side_mode": "single",
+    "default_side": "right"
+  },
+  "rep_counting": {
+    "hysteresis_deg": 6,
+    "confirm_ms": 120,
+    "min_hold_ms": 0,
+    "max_rep_ms": 15000,
+    "max_signal_gap_ms": 900,
+    "start_deg": 20,
+    "target_deg": 60,
+    "min_rep_ms": 700
+  },
+  "dosage": {
+    "reps_per_set": 10,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Lift your knee a little higher."
+    },
+    "form_rules": []
+  },
+  "guidance": {
+    "setup": [
+      "Stand side-on to the screen next to a stable support you can hold.",
+      "Stand tall with your weight on the leg farther from the camera."
+    ],
+    "cues": {
+      "start": "Both feet on the floor.",
+      "move": "Lift the knee nearest the camera up toward the green line.",
+      "hold": "Pause with your knee up.",
+      "back": "Lower your foot slowly back to the floor."
+    },
+    "key_points": [
+      "Stand tall; avoid leaning back as you lift.",
+      "Lift with control rather than swinging the leg.",
+      "Hold the support if you need it."
+    ],
+    "tempo": "About 1–2 seconds up and 1–2 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

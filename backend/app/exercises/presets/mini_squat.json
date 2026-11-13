@@ -1,0 +1,92 @@
+{
+  "id": "mini_squat",
+  "version": 2,
+  "name": "Mini squat",
+  "description": "A small knee bend from standing, then straightening back up. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand side-on to the screen, feet hip-width apart. Hold a stable support if you need one.",
+    "Bend your knees a little, as far as your therapist has asked.",
+    "Straighten back up to standing."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Stand side-on so your hip, knee and ankle stay in view."
+  },
+  "relevant_landmarks": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "display_angles": [
+    "knee_flexion",
+    "hip_flexion"
+  ],
+  "signal": {
+    "joint": "knee_flexion",
+    "side_mode": "mean_of_visible"
+  },
+  "rep_counting": {
+    "hysteresis_deg": 6,
+    "confirm_ms": 120,
+    "min_hold_ms": 0,
+    "max_rep_ms": 15000,
+    "max_signal_gap_ms": 900,
+    "start_deg": 15,
+    "target_deg": 50,
+    "min_rep_ms": 1000
+  },
+  "dosage": {
+    "reps_per_set": 8,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Bend your knees a little further."
+    },
+    "form_rules": [
+      {
+        "id": "chest_up",
+        "joint": "hip_flexion",
+        "side": "signal",
+        "phases": [
+          "moving",
+          "at_target"
+        ],
+        "max_deg": 70,
+        "sustain_ms": 500,
+        "message": "Keep your chest up as you bend."
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Stand side-on to the screen, next to a stable support you can hold if needed.",
+      "Feet hip-width apart, weight evenly on both feet."
+    ],
+    "cues": {
+      "start": "Standing tall, knees straight.",
+      "move": "Bend your knees a little, toward the green line.",
+      "hold": "Pause briefly.",
+      "back": "Straighten back up to standing."
+    },
+    "key_points": [
+      "Keep your chest up and your back straight.",
+      "Keep your heels on the floor.",
+      "Bend only as far as your therapist has asked."
+    ],
+    "tempo": "About 2 seconds down and 2 seconds up."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+*.local
+
+# Model assets are downloaded, not committed (see scripts/download_model.py)
+models/*.task
+models/*.part
+
+# Never commit recordings or local data
+*.mp4
+*.mov
+*.avi
+*.db
+*.sqlite3
+.env
+
+.DS_Store
+
+# Local data: custom exercises, consented angle data, (later) the database
+data/

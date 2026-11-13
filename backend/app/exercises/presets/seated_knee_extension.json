@@ -1,0 +1,94 @@
+{
+  "id": "seated_knee_extension",
+  "version": 2,
+  "name": "Seated knee extension",
+  "description": "From sitting, one knee straightens to lift the foot, then lowers. Demonstration configuration for software testing.",
+  "instructions": [
+    "Sit on a stable chair side-on to the screen, with the working leg nearest the camera.",
+    "Straighten your knee to lift your foot.",
+    "Hold briefly, then lower your foot back down."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Sit side-on with the working leg nearest the camera so hip, knee and ankle stay in view."
+  },
+  "relevant_landmarks": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "display_angles": [
+    "knee_flexion",
+    "hip_flexion"
+  ],
+  "signal": {
+    "joint": "knee_flexion",
+    "side_mode": "single",
+    "default_side": "right"
+  },
+  "rep_counting": {
+    "hysteresis_deg": 6,
+    "confirm_ms": 120,
+    "min_hold_ms": 1000,
+    "max_rep_ms": 20000,
+    "max_signal_gap_ms": 900,
+    "start_deg": 70,
+    "target_deg": 20,
+    "min_rep_ms": 1200
+  },
+  "dosage": {
+    "reps_per_set": 10,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Straighten your knee a little further."
+    },
+    "form_rules": [
+      {
+        "id": "stay_seated",
+        "joint": "hip_flexion",
+        "side": "signal",
+        "phases": [
+          "moving",
+          "at_target",
+          "returning"
+        ],
+        "min_deg": 55,
+        "sustain_ms": 600,
+        "message": "Stay seated with your back against the chair.",
+        "blocks_rep": true
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Use a stable chair without wheels, side-on to the screen, working leg nearest the camera.",
+      "Sit upright with your back against the chair and both feet flat on the floor."
+    ],
+    "cues": {
+      "start": "Foot on the floor, knee bent.",
+      "move": "Straighten your knee to lift your foot toward the green line.",
+      "hold": "Hold your leg straight.",
+      "back": "Lower your foot slowly back to the floor."
+    },
+    "key_points": [
+      "Move only at the knee; keep your thigh resting on the seat.",
+      "Hold the straight-leg position for the full hold time."
+    ],
+    "tempo": "About 2 seconds to straighten, a short hold, then 2 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

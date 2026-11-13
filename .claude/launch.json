@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "backend", "runtimeExecutable": "scripts/run_backend.sh", "runtimeArgs": [], "port": 8000 },
+    { "name": "frontend", "runtimeExecutable": "scripts/run_frontend.sh", "runtimeArgs": [], "port": 5173 }
+  ]
+}

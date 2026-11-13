@@ -1,0 +1,94 @@
+{
+  "id": "wall_pushup",
+  "version": 2,
+  "name": "Wall push-up",
+  "description": "Hands on a wall, the elbows bend to bring the chest toward the wall, then straighten. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand side-on to the screen, facing a wall at arm's length.",
+    "Place your hands on the wall at shoulder height.",
+    "Bend your elbows to bring your chest toward the wall.",
+    "Push back until your arms are straight."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Stand side-on so shoulder, elbow, wrist and hip stay in view."
+  },
+  "relevant_landmarks": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip"
+  ],
+  "display_angles": [
+    "elbow_flexion",
+    "hip_flexion"
+  ],
+  "signal": {
+    "joint": "elbow_flexion",
+    "side_mode": "mean_of_visible"
+  },
+  "rep_counting": {
+    "hysteresis_deg": 6,
+    "confirm_ms": 120,
+    "min_hold_ms": 0,
+    "max_rep_ms": 15000,
+    "max_signal_gap_ms": 900,
+    "start_deg": 25,
+    "target_deg": 80,
+    "min_rep_ms": 1000
+  },
+  "dosage": {
+    "reps_per_set": 8,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Bend your elbows a little further."
+    },
+    "form_rules": [
+      {
+        "id": "body_straight",
+        "joint": "hip_flexion",
+        "side": "signal",
+        "phases": [
+          "moving",
+          "at_target",
+          "returning"
+        ],
+        "max_deg": 25,
+        "sustain_ms": 500,
+        "message": "Keep your body in a straight line."
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Stand side-on to the screen, facing a wall at about arm's length.",
+      "Place your hands flat on the wall at shoulder height, slightly wider than your shoulders."
+    ],
+    "cues": {
+      "start": "Arms straight, hands on the wall.",
+      "move": "Bend your elbows to bring your chest toward the wall.",
+      "hold": "Pause close to the wall.",
+      "back": "Push back until your arms are straight."
+    },
+    "key_points": [
+      "Keep your body in a straight line from head to heels.",
+      "Keep your heels on the floor.",
+      "Move smoothly in both directions."
+    ],
+    "tempo": "About 2 seconds in and 2 seconds out."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

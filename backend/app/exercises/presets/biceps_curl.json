@@ -1,0 +1,95 @@
+{
+  "id": "biceps_curl",
+  "version": 4,
+  "name": "Biceps curl",
+  "description": "One elbow bends to bring the hand toward the shoulder, then straightens. Demonstration configuration for software testing.",
+  "instructions": [
+    "Stand side-on to the screen with the working arm nearest the camera.",
+    "Start with the arm straight by your side.",
+    "Bend the elbow to bring your hand up, keeping the upper arm still.",
+    "Straighten the arm back down in a controlled way."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Turn so the working arm faces the camera. The bend must happen side-on to the camera to be measured."
+  },
+  "relevant_landmarks": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist"
+  ],
+  "display_angles": [
+    "elbow_flexion",
+    "shoulder_elevation"
+  ],
+  "signal": {
+    "joint": "elbow_flexion",
+    "side_mode": "single",
+    "default_side": "right"
+  },
+  "rep_counting": {
+    "start_deg": 35,
+    "target_deg": 110,
+    "hysteresis_deg": 8,
+    "confirm_ms": 100,
+    "min_hold_ms": 0,
+    "min_rep_ms": 800,
+    "max_rep_ms": 15000,
+    "max_signal_gap_ms": 750
+  },
+  "dosage": {
+    "reps_per_set": 10,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Bend your elbow a little further.",
+      "too_fast": "Try a slower, controlled curl."
+    },
+    "form_rules": [
+      {
+        "id": "upper_arm_still",
+        "joint": "shoulder_elevation",
+        "side": "signal",
+        "phases": [
+          "moving",
+          "at_target",
+          "returning"
+        ],
+        "max_deg": 45,
+        "sustain_ms": 500,
+        "message": "Keep your upper arm still by your side.",
+        "blocks_rep": true
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Stand side-on to the screen with the working arm nearest the camera.",
+      "Let the arm hang straight down, palm facing forward.",
+      "If you use a weight, use the one your therapist chose."
+    ],
+    "cues": {
+      "start": "Arm straight down by your side.",
+      "move": "Bend your elbow to bring your hand up toward the green line.",
+      "hold": "Pause briefly at the top.",
+      "back": "Lower your hand slowly until your arm is straight."
+    },
+    "key_points": [
+      "Move only at the elbow.",
+      "Straighten the arm fully between repetitions."
+    ],
+    "tempo": "About 2 seconds up and 2 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}

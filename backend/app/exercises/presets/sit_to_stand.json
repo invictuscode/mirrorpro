@@ -1,0 +1,91 @@
+{
+  "id": "sit_to_stand",
+  "version": 3,
+  "name": "Sit to stand",
+  "description": "Rising from a seated position to standing, then sitting back down. Demonstration configuration for software testing.",
+  "instructions": [
+    "Sit on a stable chair, side-on to the screen, feet flat on the floor.",
+    "Stand up fully.",
+    "Sit back down in a controlled way."
+  ],
+  "camera": {
+    "view": "side",
+    "angle_space": "image",
+    "guidance": "Place the chair side-on to the camera so your hip, knee and ankle stay in view while sitting and standing."
+  },
+  "relevant_landmarks": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "display_angles": [
+    "knee_flexion",
+    "hip_flexion"
+  ],
+  "signal": {
+    "joint": "knee_flexion",
+    "side_mode": "mean_of_visible"
+  },
+  "rep_counting": {
+    "start_deg": 65,
+    "target_deg": 20,
+    "hysteresis_deg": 8,
+    "confirm_ms": 150,
+    "min_hold_ms": 0,
+    "min_rep_ms": 1200,
+    "max_rep_ms": 20000,
+    "max_signal_gap_ms": 1000
+  },
+  "dosage": {
+    "reps_per_set": 5,
+    "sets": 2
+  },
+  "feedback": {
+    "messages": {
+      "target_not_reached": "Stand up fully before sitting back down."
+    },
+    "form_rules": [
+      {
+        "id": "stand_tall",
+        "joint": "hip_flexion",
+        "side": "signal",
+        "phases": [
+          "at_target"
+        ],
+        "max_deg": 30,
+        "sustain_ms": 600,
+        "message": "Stand tall at the top of the movement."
+      }
+    ]
+  },
+  "guidance": {
+    "setup": [
+      "Use a stable chair without wheels, placed side-on to the screen, with something sturdy nearby to hold if your therapist advised it.",
+      "Sit near the front of the seat with your feet flat and hip-width apart."
+    ],
+    "cues": {
+      "start": "Seated, feet flat on the floor.",
+      "move": "Lean forward slightly and stand up fully.",
+      "hold": "Stand tall.",
+      "back": "Sit back down slowly and with control."
+    },
+    "key_points": [
+      "Stand up all the way before sitting down again.",
+      "Sit down slowly; avoid dropping into the chair.",
+      "Keep your feet in place throughout."
+    ],
+    "tempo": "About 2 seconds up and 3 seconds down."
+  },
+  "safety_notes": [],
+  "clinical_review": {
+    "status": "unreviewed_demo",
+    "reviewed_by": null,
+    "note": "Thresholds and dosage are illustrative values for software testing, not clinical targets."
+  },
+  "reference_demonstration": null
+}
